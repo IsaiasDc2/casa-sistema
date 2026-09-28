@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { listar, crear, rpc } from "../../lib/db";
-import { supabase } from "../../lib/supabase";
+import { listar, crear, rpc } from "../../lib/db";import { supabase } from "../../lib/supabase";
 
 export default function PurchasesPage() {
   const [compras, setCompras] = useState([]);
@@ -89,6 +88,27 @@ export default function PurchasesPage() {
       rec[i.producto_id] = Number(i.cantidad) - Number(i.cantidad_recibida);
     });
     setRecepcion(rec);
+  };
+
+  const registrarDeuda = async () => {
+    try {
+      let cuentas = await listar("cuentas_corrientes", "id", (x) =>
+        x.eq("tipo", "proveedor").eq("proveedor_id", detalle.proveedor_id).limit(1));
+      if (!cuentas[0]) {
+        cuentas = [await crear("cuentas_corrientes", { tipo: "proveedor", proveedor_id: detalle.proveedor_id })];
+      }
+      await rpc("registrar_movimiento_cc", {
+        p_cuenta: cuentas[0].id,
+        p_tipo: "cargo",
+        p_monto: Number(detalle.total),
+        p_concepto: `Compra ${detalle.numero} a crédito`,
+        p_ref_tipo: "compra",
+        p_ref_id: detalle.id,
+      });
+      avisar("Deuda registrada en cuenta corriente del proveedor");
+    } catch (err) {
+      avisar(err.message, false);
+    }
   };
 
   const recibir = async () => {
@@ -218,6 +238,7 @@ export default function PurchasesPage() {
           </div>
           <div className="form-acciones">
             <button type="button" onClick={recibir}>Confirmar recepción</button>
+            <button type="button" className="secundario" onClick={registrarDeuda}>Registrar deuda</button>
             <button type="button" className="secundario" onClick={() => setDetalle(null)}>Cerrar</button>
           </div>
         </div>

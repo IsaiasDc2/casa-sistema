@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { listar, crear, actualizar, rpc } from "../../lib/db";
-
 const VACIO = {
   razon_social: "", nombre_comercial: "", identificacion_fiscal: "",
   telefono: "", email: "", direccion: "", contacto: "", condiciones_pago: "",
@@ -54,6 +53,16 @@ export default function SuppliersPage() {
         : [];
       setMovs(movimientos);
       setDetalle({ ...p, saldo: cuenta?.saldo ?? 0, cuenta_id: cuenta?.id || null });
+    } catch (e) {
+      avisar(e.message, false);
+    }
+  };
+
+  const abrirCuenta = async () => {
+    try {
+      await crear("cuentas_corrientes", { tipo: "proveedor", proveedor_id: detalle.id });
+      avisar("Cuenta corriente abierta");
+      verCuenta({ ...detalle });
     } catch (e) {
       avisar(e.message, false);
     }
@@ -141,6 +150,11 @@ export default function SuppliersPage() {
             Cuenta corriente — {detalle.razon_social}
             {" · "}Saldo: <strong>${Number(detalle.saldo || 0).toLocaleString("es-AR")}</strong>
           </h3>
+          {!detalle.cuenta_id && (
+            <div className="form-acciones">
+              <button type="button" onClick={abrirCuenta}>Abrir cuenta corriente</button>
+            </div>
+          )}
           <form className="form-linea" onSubmit={registrarPago}>
             <input required type="number" step="0.01" min="0" placeholder="Monto del pago" value={pago.monto} onChange={(e) => setPago({ ...pago, monto: e.target.value })} />
             <input placeholder="Concepto" value={pago.concepto} onChange={(e) => setPago({ ...pago, concepto: e.target.value })} />

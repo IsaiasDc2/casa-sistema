@@ -125,6 +125,48 @@ export default function PosPage() {
       descuento: Number(i.descuento || 0),
     }));
 
+  const cobrarACuenta = async () => {
+    if (!turno || !empleado) return;
+    if (items.length === 0 || !clienteId) {
+      avisar("Elegí un cliente registrado para vender a cuenta", false);
+      return;
+    }
+    setCobrando(true);
+    try {
+      const ccMetodo = metodos.find((m) => m.nombre.toLowerCase().includes("cuenta corriente"));
+      if (!ccMetodo) throw new Error("Método 'Cuenta corriente' inactivo");
+      const id = await rpc("registrar_venta", {
+        p_turno: turno.id,
+        p_cliente: clienteId,
+        p_vendedor: empleado.id,
+        p_descuento: Number(descGlobal || 0),
+        p_items: payloadItems(),
+        p_pagos: [{ metodo_id: ccMetodo.id, monto: total }],
+      });
+      const [v] = await listar("ventas", "numero", (x) => x.eq("id", id).limit(1));
+      let cuentas = await listar("cuentas_corrientes", "id", (x) =>
+        x.eq("tipo", "cliente").eq("cliente_id", clienteId).limit(1));
+      if (!cuentas[0]) {
+        cuentas = [await crear("cuentas_corrientes", { tipo: "cliente", cliente_id: clienteId })];
+      }
+      await rpc("registrar_movimiento_cc", {
+        p_cuenta: cuentas[0].id,
+        p_tipo: "cargo",
+        p_monto: total,
+        p_concepto: `Venta ${v.numero} a cuenta`,
+        p_ref_tipo: "venta",
+        p_ref_id: id,
+      });
+      setTicket({ numero: v.numero, total, items: [...items], pagos: [{ metodo_id: ccMetodo.id, monto: total }], vuelto: 0 });
+      limpiar();
+      avisar(`Venta ${v.numero} cargada a cuenta corriente`);
+    } catch (err) {
+      avisar(err.message, false);
+    } finally {
+      setCobrando(false);
+    }
+  };
+
   const limpiar = () => {
     setItems([]);
     setPagos([]);
@@ -377,6 +419,9 @@ export default function PosPage() {
         <div className="form-acciones">
           <button id="pos-cobrar" disabled={cobrando || items.length === 0} onClick={() => cobrar(false)}>
             {cobrando ? "Registrando…" : `Cobrar $${total.toLocaleString("es-AR")} (F9)`}
+          </button>
+          <button type="button" className="secundario" disabled={cobrando || items.length === 0 || !clienteId} onClick={cobrarACuenta} title="Requiere cliente registrado">
+            A cuenta
           </button>
           <button type="button" className="secundario" disabled={items.length === 0} onClick={() => cobrar(true)}>
             Suspender

@@ -56,6 +56,16 @@ export default function CustomersPage() {
     }
   };
 
+  const abrirCuenta = async () => {
+    try {
+      await crear("cuentas_corrientes", { tipo: "cliente", cliente_id: detalle.id });
+      avisar("Cuenta corriente abierta");
+      verCuenta({ ...detalle });
+    } catch (e) {
+      avisar(e.message, false);
+    }
+  };
+
   const registrarPago = async (e) => {
     e.preventDefault();
     if (!detalle.cuenta_id) {
@@ -141,6 +151,11 @@ export default function CustomersPage() {
             Cuenta corriente — {detalle.nombre} {detalle.apellido}
             {" · "}Saldo: <strong>${Number(detalle.saldo || 0).toLocaleString("es-AR")}</strong>
           </h3>
+          {!detalle.cuenta_id && (
+            <div className="form-acciones">
+              <button type="button" onClick={abrirCuenta}>Abrir cuenta corriente</button>
+            </div>
+          )}
           <form className="form-linea" onSubmit={registrarPago}>
             <input required type="number" step="0.01" min="0" placeholder="Monto del pago" value={pago.monto} onChange={(e) => setPago({ ...pago, monto: e.target.value })} />
             <input placeholder="Concepto" value={pago.concepto} onChange={(e) => setPago({ ...pago, concepto: e.target.value })} />

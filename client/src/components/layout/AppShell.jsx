@@ -14,6 +14,7 @@ const MENU = [
   { to: "caja", label: "Caja", permiso: "caja.operar" },
   { to: "gastos", label: "Gastos", permiso: "gastos.gestionar" },
   { to: "devoluciones", label: "Devoluciones", permiso: "devoluciones.crear" },
+  { to: "reclamos", label: "Reclamos", permiso: "reclamos.gestionar" },
   { to: "reportes", label: "Reportes", permiso: "reportes.ver" },
   { to: "admin/usuarios", label: "Usuarios", permiso: "usuarios.gestionar" },
   { to: "admin/auditoria", label: "Auditoría", permiso: "auditoria.ver" },

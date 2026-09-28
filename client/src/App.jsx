@@ -15,6 +15,7 @@ import SalesPage from "./features/sales/SalesPage";
 import CajaPage from "./features/cash/CajaPage";
 import ExpensesPage from "./features/expenses/ExpensesPage";
 import ReturnsPage from "./features/returns/ReturnsPage";
+import ClaimsPage from "./features/claims/ClaimsPage";
 import ReportsPage from "./features/reports/ReportsPage";
 import DashboardPage from "./features/reports/DashboardPage";
 import UsersPage from "./features/admin/UsersPage";
@@ -53,6 +54,7 @@ export default function App() {
           <Route path="caja" element={<Protegida codigo="caja.operar"><CajaPage /></Protegida>} />
           <Route path="gastos" element={<Protegida codigo="gastos.gestionar"><ExpensesPage /></Protegida>} />
           <Route path="devoluciones" element={<Protegida codigo="devoluciones.crear"><ReturnsPage /></Protegida>} />
+          <Route path="reclamos" element={<Protegida codigo="reclamos.gestionar"><ClaimsPage /></Protegida>} />
           <Route path="reportes" element={<Protegida codigo="reportes.ver"><ReportsPage /></Protegida>} />
           <Route path="admin/usuarios" element={<Protegida codigo="usuarios.gestionar"><UsersPage /></Protegida>} />
           <Route path="admin/auditoria" element={<Protegida codigo="auditoria.ver"><AuditPage /></Protegida>} />
