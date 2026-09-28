@@ -1,0 +1,117 @@
+:root {
+  --bg: #0b0908;
+  --surface: #141110;
+  --card: #1c1614;
+  --border: #2e2521;
+  --text: #f5efe9;
+  --muted: #a8a29e;
+  --primary: #f97316;
+  --accent: #ef4444;
+  --ok: #4ade80;
+  --font: "Inter", system-ui, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body, #root { min-height: 100%; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+input, button {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  padding: 0.7rem 0.9rem;
+  margin-bottom: 0.8rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+}
+
+button {
+  cursor: pointer;
+}
+
+.auth-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: radial-gradient(800px 400px at 50% 0%, rgba(249, 115, 22, 0.12), transparent 60%), var(--bg);
+}
+
+.auth-card {
+  width: min(400px, 100%);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+
+.auth-card h1 { font-size: 1.8rem; }
+.auth-card > p { color: var(--muted); margin: 0.4rem 0 1.5rem; }
+
+.auth-card button {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  font-weight: 800;
+}
+
+.auth-card button:disabled { opacity: 0.6; }
+
+.auth-error {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+  border-radius: 8px;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.app-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.5rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+}
+
+.app-bar nav { display: flex; gap: 1.2rem; }
+.app-bar nav a { color: var(--muted); font-weight: 600; }
+.app-bar nav a:hover { color: var(--primary); }
+
+.app-main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.app-main h2 { margin-bottom: 1rem; }
+.app-main p { color: var(--muted); margin-bottom: 0.6rem; }
