@@ -26,16 +26,16 @@ casa-isaias/
 
 - [x] FASE 1 — DB, funciones transaccionales, RLS, scaffold
 - [x] FASE 2 — Autenticación y roles (menú por permiso, gestión usuarios)
-- [ ] FASE 3 — Productos y categorías
-- [ ] FASE 4 — Inventario
-- [ ] FASE 5 — Clientes y proveedores (+ CC)
-- [ ] FASE 6 — Compras
-- [ ] FASE 7 — Caja
-- [ ] FASE 8 — POS y ventas
-- [ ] FASE 9 — Devoluciones y gastos
-- [ ] FASE 10 — Reportes
-- [ ] FASE 11 — Auditoría y hardening
-- [ ] FASE 12 — Producción
+- [x] FASE 3 — Productos y categorías (CRUD, SKU/barcode, Storage)
+- [x] FASE 4 — Inventario (stock, ajustes, transferencias, alertas)
+- [x] FASE 5 — Clientes y proveedores (+ cuentas corrientes)
+- [x] FASE 6 — Compras (órdenes, recepción parcial, deuda)
+- [x] FASE 7 — Caja (turnos, movimientos, arqueo, historial)
+- [x] FASE 8 — POS y ventas (barcode, suspendidas, pago dividido, ticket)
+- [x] FASE 9 — Devoluciones (2 pasos) y gastos
+- [x] FASE 10 — Reportes (vistas, filtros, CSV) + Dashboard
+- [x] FASE 11 — Auditoría (solo lectura) y seguridad
+- [x] FASE 12 — Optimización y producción (ver `docs/FASE12-produccion.md`)
 
 ## Desarrollo
 

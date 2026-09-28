@@ -3,14 +3,21 @@ import { useSesionContext } from "../../app/SesionContext";
 import "./AppShell.css";
 
 const MENU = [
+  { to: "dashboard", label: "Dashboard", permiso: "dashboard.ver" },
   { to: "pos", label: "POS", permiso: "pos.operar" },
   { to: "productos", label: "Productos", permiso: "productos.ver" },
-  { to: "caja", label: "Caja", permiso: "caja.operar", fase: "FASE 7" },
-  { to: "compras", label: "Compras", permiso: "compras.ver", fase: "FASE 6" },
-  { to: "clientes", label: "Clientes", permiso: "clientes.ver", fase: "FASE 5" },
-  { to: "reportes", label: "Reportes", permiso: "reportes.ver", fase: "FASE 10" },
+  { to: "inventario", label: "Inventario", permiso: "inventario.ver" },
+  { to: "compras", label: "Compras", permiso: "compras.ver" },
+  { to: "ventas", label: "Ventas", permiso: "ventas.ver" },
+  { to: "clientes", label: "Clientes", permiso: "clientes.ver" },
+  { to: "proveedores", label: "Proveedores", permiso: "compras.ver" },
+  { to: "caja", label: "Caja", permiso: "caja.operar" },
+  { to: "gastos", label: "Gastos", permiso: "gastos.gestionar" },
+  { to: "devoluciones", label: "Devoluciones", permiso: "devoluciones.crear" },
+  { to: "reportes", label: "Reportes", permiso: "reportes.ver" },
   { to: "admin/usuarios", label: "Usuarios", permiso: "usuarios.gestionar" },
-  { to: "admin/auditoria", label: "Auditoría", permiso: "auditoria.ver", fase: "FASE 11" },
+  { to: "admin/auditoria", label: "Auditoría", permiso: "auditoria.ver" },
+  { to: "admin/config", label: "Configuración", permiso: "configuracion.gestionar" },
 ];
 
 export default function AppShell() {
