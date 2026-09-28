@@ -25,7 +25,7 @@ casa-isaias/
 ## Estado por fase
 
 - [x] FASE 1 — DB, funciones transaccionales, RLS, scaffold
-- [ ] FASE 2 — Autenticación y roles (menú por permiso, gestión usuarios)
+- [x] FASE 2 — Autenticación y roles (menú por permiso, gestión usuarios)
 - [ ] FASE 3 — Productos y categorías
 - [ ] FASE 4 — Inventario
 - [ ] FASE 5 — Clientes y proveedores (+ CC)

@@ -1,0 +1,101 @@
+.app { display: flex; min-height: 100vh; }
+
+.app-side {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem 0.9rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.app-logo {
+  font-size: 1.25rem;
+  font-weight: 800;
+  padding: 0.4rem 0.7rem 1.2rem;
+  color: var(--text);
+}
+
+.app-side nav { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+
+.app-side nav a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.8rem;
+  border-radius: 8px;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.app-side nav a:hover { background: var(--card); color: var(--text); }
+
+.app-side nav a.activo {
+  background: var(--card);
+  color: var(--primary);
+}
+
+.app-side nav a small {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.1rem 0.45rem;
+}
+
+.app-user {
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.app-user small { color: var(--muted); text-transform: capitalize; }
+
+.app-user button {
+  margin-top: 0.6rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 8px;
+  padding: 0.5rem;
+  font-weight: 600;
+}
+
+.app-user button:hover { border-color: var(--accent); color: var(--accent); }
+
+.app-main { flex: 1; min-width: 0; max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem; width: 100%; }
+.app-main h2 { margin-bottom: 1rem; }
+.app-main p { color: var(--muted); margin-bottom: 0.6rem; }
+
+.app-cargando, .app-bloqueado { padding: 3rem; text-align: center; }
+.app-bloqueado button {
+  margin-top: 1rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 700;
+}
+
+@media (max-width: 760px) {
+  .app { flex-direction: column; }
+  .app-side {
+    width: 100%; height: auto; position: static;
+    flex-direction: row; align-items: center; gap: 0.6rem;
+    overflow-x: auto; padding: 0.7rem;
+  }
+  .app-logo { padding: 0.3rem 0.5rem; font-size: 1.05rem; }
+  .app-side nav { flex-direction: row; }
+  .app-side nav a small { display: none; }
+  .app-user { border: none; padding: 0; flex-direction: row; align-items: center; gap: 0.6rem; margin-left: auto; }
+  .app-user button { margin: 0; }
+}
